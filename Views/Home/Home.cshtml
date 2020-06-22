@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] ="Home";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Dojo Activity Center</h1>
+    <p>
+        Welcome, @ViewBag.User.Name! 
+        <a href="/logout">Logout</a>
+    </p>
+</div>
+<div class="col"></div>
+    <table class="table table-bordered">
+        <thead class="thead-dark"> 
+            <tr>
+                <th>Activity</th>
+                <th>Date and Time</th>
+                <th>Duration</th>
+                <th>Event Coordinator</th>
+                <th>No. of Participants</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Act a in ViewBag.AllActs)
+            {
+                <tr>
+                    <td>
+                        <a href="/activity/@a.ActId">@a.Title</a>
+                    </td>
+                    <td>@a.Date @@ @a.Time</td>
+                    <td>@a.Duration @a.DurationType</td>
+                    <td>@a.Creater.Name</td>
+                    <td>@a.AllParties.Count</td>
+                    <td>
+                        @if(a.UserId == ViewBag.User.UserId)
+                        {
+                            <a href="/activity/@a.ActId/delete">Delete</a>
+                        }
+                        else if (a.AllParties.Any( associate => associate.UserId == ViewBag.User.UserId ))
+                        {
+                            <a href="/activity/@a.ActId/leave">Leave</a>
+                        }
+                        else
+                        {
+                            <a href="/activity/@a.ActId/join">Join</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class= "btn btn-primary align-self-end" href="/new">Add New Activity</a>
+</div>
