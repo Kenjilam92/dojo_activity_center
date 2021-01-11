@@ -16,9 +16,9 @@ namespace dojo_activity.Models
         [DataType(DataType.EmailAddress)]
         public string Email {get;set;}
         [Required]
-        [RegexPass]
         [DataType(DataType.Password)]
         [MinLength(8,ErrorMessage="Password must be at least 8 characters")]
+        [RegexPass]
         public string Password {get;set;}
         public DateTime CreateAt {get;set;} = DateTime.Now ;
         public DateTime UpdateAt {get;set;} = DateTime.Now ;

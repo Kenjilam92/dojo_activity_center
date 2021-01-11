@@ -4,9 +4,9 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Dojo Activity Center</h1>
-    <p>
-        Welcome, @ViewBag.User.Name! 
-        <a href="/logout">Logout</a>
+    <p class="h4">
+        Hello, <span class="text-success"> @ViewBag.User.Name </span>! 
+        <a class="btn btn-danger" href="/logout">Logout</a>
     </p>
 </div>
 <div class="col"></div>
@@ -17,7 +17,7 @@
                 <th>Date and Time</th>
                 <th>Duration</th>
                 <th>Event Coordinator</th>
-                <th>No. of Participants</th>
+                <th>Participant</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,7 +28,7 @@
                     <td>
                         <a href="/activity/@a.ActId">@a.Title</a>
                     </td>
-                    <td>@a.Date @@ @a.Time</td>
+                    <td>@a.Date.ToShortDateString() at @a.Time.ToShortTimeString()</td>
                     <td>@a.Duration @a.DurationType</td>
                     <td>@a.Creater.Name</td>
                     <td>@a.AllParties.Count</td>

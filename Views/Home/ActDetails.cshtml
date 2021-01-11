@@ -2,39 +2,58 @@
     ViewData["Title"] = ViewBag.Act.Title;
 }
 
-<div class="d-flex justify-content-between mb-3">
+<div class="jumbotron d-flex justify-content-between mb-3">
     <h1>Dojo Activity Center</h1>
     <p>
         <a href="/home">Home</a> | <a href="/logout">Logout</a>
     </p>
 </div>
-<div class="col">
-    <h2>@ViewBag.Act.Title</h2>
-    @{
-        List<Associate> ListParties = ViewBag.Act.AllParties;
-    }
-    @if( ListParties.Any(associate => associate.UserId == ViewBag.User.UserId) )
-    {
-        <a href="/activity/@ViewBag.Act.ActId/leave">Leave</a>
-    }
-    else if( ViewBag.Act.UserId == ViewBag.User.UserId)
-    {
-        <a href="/activity/@ViewBag.Act.ActId/delete">Delete</a>
-    }
-    else 
-    {
-        <a href="/activity/@ViewBag.Act.ActId/join">Join</a>
-    }
-    <p>Event Coordinator: @ViewBag.Act.Creater.Name</p>
-    <p>Description:</p>
-    <div>
-        @ViewBag.Act.Description
-    </div>
-    <p>Participants:</p>
-    <ul>
-        @foreach (var u in ViewBag.Act.AllParties)
-        {
-            <li>@u.User.Name</li>
+<div class="col bg-dark text-white border-round p-5">
+    <div class="row justify-content-between mb-3">
+        <h2>@ViewBag.Act.Title</h2>
+        
+        @{
+            List<Associate> ListParties = ViewBag.Act.AllParties;
         }
-    </ul>
+        @if( ListParties.Any(associate => associate.UserId == ViewBag.User.UserId) )
+        {
+            <a class="btn btn-warning" href="/activity/@ViewBag.Act.ActId/leave">Leave</a>
+        }
+        else if( ViewBag.Act.UserId == ViewBag.User.UserId)
+        {
+            <a class="btn btn-danger" href="/activity/@ViewBag.Act.ActId/delete">Delete</a>
+        }
+        else 
+        {
+            <a class="btn btn-success" href="/activity/@ViewBag.Act.ActId/join">Join</a>
+        }
+    </div>
+    <div class="row mb-3">
+        <div class="col-4 text-info">
+            <p>Event Coordinator:</p>
+        </div>
+        <div class="col-8">
+            <p>@ViewBag.Act.Creater.Name</p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4 text-info">
+            Description:
+        </div>
+        <div class="col-8">
+            @ViewBag.Act.Description
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4 text-info">
+            Participants:
+        </div>
+        <div class="col-8">
+            <ul>
+                @foreach (var u in ViewBag.Act.AllParties)
+                {
+                    <li>@u.User.Name</li>
+                }
+            </ul>
+        </div>    
 </div>
